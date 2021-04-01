@@ -2,14 +2,26 @@
 This site is intended for people to not only FIND recipes, but also SHARE their own, whilst simultaneously inspecting various cooking tools that can help with these fantastic cooking moments!
 Thus, this site will aim to provide users with all they need to achieve their ideal meal.
 
-## UX
----
 
+---
+# UX
 
 * *I want to find/search for recipes*
 * *Perhaps there are tools that will help me with my cooking?*
 * *How do I share my own recipes if I want to?*
 * *I want to manage my findings and content.*
+
+There are difference for annonymus users and registered users, and their site abilties.
+This also applies for the admin user.
+
+Given 2 registered users, user 1 should not be able to update or delete user 2's recipes, and also the anonymys cannot allter any other's recipes. Users cannot change anything about
+any other users profiles as well.
+
+If a recipe is deleted but you clicked on edit or through accessed it through the URL, it should reirect you to a 404 page.
+
+The admin user (site owner) should be able to alter any user's recipies.
+
+The search bar will show/auto complete only titles.
 
 Wireframes are provided/linked below: (included are wireframes for 3 major devices; **Desktop**, **Mobile**, and **Tablet**)
 
@@ -31,6 +43,11 @@ or
 Result - The feature acted as normally and it did Y
 Fix - I did Z to the code because something was missing
 and the inclusion of screenshots.
+
+* Log In
+* Register
+* Manage
+* Browse
 ---
 
 # Technologies/Programs Used
@@ -45,6 +62,8 @@ and the inclusion of screenshots.
 * Lighthouse Audits
 * Github
 * Gitpod
+* dnspython
+* Flask-pymongo
 
 ---
 
