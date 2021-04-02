@@ -9,3 +9,19 @@
 body {
     background-color: aliceblue;
 }
+
+blockquote {
+    text-align: center;
+}
+
+/*colors for social media links*/
+.color1 {
+    color:rgb(255,0,0);
+}
+.color2 {
+    color:#3b5998;
+}
+.color3 {
+    color:rgb(29, 161, 242);
+}
+

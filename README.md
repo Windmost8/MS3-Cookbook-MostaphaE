@@ -81,13 +81,24 @@ and the inclusion of screenshots.
 * Heroku
 * dnspython
 * Flask-pymongo
+* Fontawesome
+* Jquery
+* Werkzeug
 
 Additional technologies/installs may be observed in the requirements.txt file located in the directory, or accessed through here; https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/39c2cf5fe35dca38f12ab4fad3b0c562eef14493/requirements.txt
 
 ---
 
 # Typography/Color Sceheme
+As mentioned in the technologies seciton, materlize was used as a css library for this project.
+The color scheme decided upon was light orange, with an aliceblue background. The light orange in question is
+called "orange lighten-2" from Materlize. The reason for orange was because I felt that it closely matched the theme
+of the site, which was about cooking, and orange is a color very dominantly present in dishes.
 
+The reason for an aliceblue background was just as a contrast against the orange color.
+
+In addition, a text-shadow css class wa put in place to allow texts to be shown easier for the eyes against colorful backgrounds, which in this case was orange again.
+Also, the text itself is white in color for it to also stand out despite the orange background.
 
 # Testing
 
@@ -140,7 +151,8 @@ Such as;
 ---
 
 # Credits 
-
-
+Two of the cooking images were taken from https://www.dreamstime.com/photos-images/asian-cooking.html.
+The two in question being:
+https://thumbs.dreamstime.com/b/onion-pepper-tomato-tomato-lime-vegetable-asian-cooking-vintage-image-onion-pepper-tomato-tomato-lime-vegetable-asian-185990624.jpghttps://thumbs.dreamstime.com/b/asian-food-cooking-wok-noodles-chicken-stir-fry-vegetables-ingredients-spices-sauces-chopsticks-dark-rustic-83701227.jpg
 
 ---

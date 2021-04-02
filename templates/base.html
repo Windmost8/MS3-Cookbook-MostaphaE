@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--fontawesome cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+        integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA==" crossorigin="anonymous" type="text/css">
+    <!--materlize css cdn-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css">
+    <!--jinja because of static folder-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
+    {% block styles %}
+    {% endblock %}
+    <title>reCook</title>
+</head>
+<body>
+
+    <!--materlize navbar-->
+    <header>
+        <!-- top navbar -->
+		<nav class="nav-extended text-shadow orange lighten-2">
+			<div class="nav-wrapper">
+				<a href="{{ url_for('get_temps') }}" class="center brand-logo">reCook <i class="fas fa-utensils"></i></a>
+				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
+				<ul class="hide-on-med-and-down">
+					<li><a href="{{ url_for('get_temps') }}"><i class="fas fa-home"></i> Home </a></li>
+					<li><a href="#"><i class="fas fa-female"></i><i class="fas fa-male"></i> Profile</a></li>
+					<li><a href="#"><i class="fas fa-times"></i> Sign Out</a></li>
+					<li><a href="{{ url_for('login') }}"><i class="fas fa-door-open"></i> Sign In</a></li>
+					<li><a href="{{ url_for('register') }}"><i class="fas fa-plus-circle"></i> Register</a></li>
+				</ul>
+			</div>
+		</nav>
+
+        <!-- mobile sidenav -->
+		<ul class="sidenav" id="mobile-demo">
+            <li><h4 class="center-align orange lighten-2">Menu</h4></li>
+            <li><a href="{{ url_for('get_temps') }}">Home</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Log Out</a></li>
+            <li><a href="{{ url_for('login') }}">Sign In</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+		</ul>
+    </header>
+    
+    <!--materlize typograpy class-->
+    <blockquote><p class="flow-text">Welcome, friends and family alike! Welcome... to an online platform to not only FIND and SHARE recipies, or INSPECT various
+        cooking tools, but to learn as we eat, or eat as we learn. Welcome one, welcome all! Enjoy.</p>
+    </blockquote>
+
+    
+
+    
+
+    
+    {% block content %}
+    {% endblock %}
+
+    <!--materlize footer-->
+    <footer class="page-footer orange lighten-2 text-shadow">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Want to Socialize? Let's Connect!</h5>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter color3"></i></a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube color1"></i></a>
+                        </li>
+                        <li>
+                            <a class="grey-text text-lighten-3" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f color2"></i></a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2021 Copyright
+            </div>
+        </div>
+    </footer>
+
+    <!--jquery cdn needed for materlize-->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" 
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!--materilize script cdn-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!--jinja for static folder-->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>
