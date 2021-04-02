@@ -18,14 +18,16 @@
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="prefix"></i>
-                        <input id="username" name="username" type="text" class="validate">
+                        <input id="username" name="username" type="text" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" 
+                        class="validate" required>
                         <label for="username">Username</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
                         <i class="prefix"></i>
-                        <input id="password" name="password" type="password" class="validate">
+                        <input id="password" name="password" type="password" minlength="5" maxlength="15" pattern="^[a-zA-Z0-9]{5,15}$" 
+                        class="validate" required>
                         <label for="password">Password</label>
                     </div>
                 </div>
@@ -36,6 +38,18 @@
                 </div>
             </div>
         </form>
+    </div>
+
+    <!--materlize Modal Trigger-->
+    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <h4>Modal Header</h4>
+            <p>A bunch of text</p>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        </div>
     </div>
 
 {% endblock %}
