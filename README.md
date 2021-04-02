@@ -1,41 +1,62 @@
-# MS3 - Online Cookbook Recipe & Tool Sharing!
-This site is intended for people to not only FIND recipes, but also SHARE their own, whilst simultaneously inspecting various cooking tools that can help with these fantastic cooking moments!
+# MS3 
+# Online Cookbook Recipe & Tool Sharing!
+This site is intended for people to not only **FIND** recipes, but also **SHARE** their own, 
+whilst simultaneously **INSPECTING** various cooking tools that can help with these fantastic cooking moments!
 Thus, this site will aim to provide users with all they need to achieve their ideal meal.
-
 
 ---
 # UX
 
+In terms of User Stories, this site behaves differently depending if the user is registered with the site, or is an anonymus visiter.
+And so, as such, the user stories differ.
+
+### **Anonymus User**
+
 * *I want to find/search for recipes*
 * *Perhaps there are tools that will help me with my cooking?*
-* *How do I share my own recipes if I want to?*
-* *I want to manage my findings and content.*
+* *What do I gain from creating an account?*
 
-There are difference for annonymus users and registered users, and their site abilties.
-This also applies for the admin user.
+### **Registered User** 
+(shares many of the user stories with anonymys users, in addition to these...)
 
-Given 2 registered users, user 1 should not be able to update or delete user 2's recipes, and also the anonymys cannot allter any other's recipes. Users cannot change anything about
-any other users profiles as well.
+* *I want to share my own recipies with others*
+* *I want to be able to manage my profile*
+* *I want to edit my own recipies*
 
-If a recipe is deleted but you clicked on edit or through accessed it through the URL, it should reirect you to a 404 page.
+However, there are also other cases that need to be noted.
 
-The admin user (site owner) should be able to alter any user's recipies.
+* *The admin user will need to be able alter anything regarding the site, including user's profiles and recipies*
 
-The search bar will show/auto complete only titles.
-
-Wireframes are provided/linked below: (included are wireframes for 3 major devices; **Desktop**, **Mobile**, and **Tablet**)
-
-
-(Alternatively, they may be found inside the "wireframes" folder directory)
-
-
+### **Wireframes**
+* Included below are links to the wireframes for three major devices; **desktop**, **mobile**, and **tablets**)
+(Alternatively, they may be found inside the "wireframes" folder directory).
 
 ---
 
-## Features
----
-* The CRUD guidelines are intended to be major features for this site's functionality and purpose.
----
+# Features
+
+In addition to other features, the **CRUD** guidelines are also intended to be major features for this site's functionality and purpose.
+
+* *Log In/Log Out*
+
+* *Register*
+
+* *Manage Profile*
+
+* *Browse*
+
+* *Search*
+
+* *Social Media*
+
+* *Navigation Menu*
+
+* *Given two registered users, user 1 should not be able to update or delete user 2's recipes, nor can the anonymus user alter any other's recipes. Users cannot change anything about
+any other users profiles as well*
+
+* *If a recipe is deleted but you clicked on edit or accessed it through the URL, it should redirect you to a 404 page*
+* *The search bar will show/auto complete only recipe titles*
+
 * Expected -Feature is expected to do X why the user does Y
 Testing - Tested the feature by doing Y
 Result - The feature did not respond due to A,B,C
@@ -44,86 +65,82 @@ Result - The feature acted as normally and it did Y
 Fix - I did Z to the code because something was missing
 and the inclusion of screenshots.
 
-* Log In
-* Register
-* Manage
-* Browse
 ---
 
 # Technologies/Programs Used
 * HTML 
 * CSS 
-* Bootstrap 4 *(for their extensive library and responsiveness)*
-* Materlize CSS Library
+* Materlize Library
 * Python
 * Flask
-* MongoDB
+* MongoDB, AWS (Free Tier)
 * Chrome Dev Tools 
 * Lighthouse Audits
 * Github
 * Gitpod
+* Heroku
 * dnspython
 * Flask-pymongo
+
+Additional technologies/installs may be observed in the requirements.txt file located in the directory, or accessed through here; https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/39c2cf5fe35dca38f12ab4fad3b0c562eef14493/requirements.txt
 
 ---
 
 # Typography/Color Sceheme
 
 
+# Testing
 
----
+### **Screenshots**
 
-## Testing
----
-* **Test Cases**
-    
-
-### Screenshots -
-All screenshots can be found in the screenshots folder,
+* All screenshots can be found in the screenshots folder,
 or viewed from this link;
 
-The screenshots include both desktop and mobile pictures, indicating the intended output.
+* The screenshots include both desktop and mobile pictures, indicating the intended output.
 Such as;
 
+### **Validation**
 
-HTML code was validated through https://validator.w3.org/
+* HTML code was validated through https://validator.w3.org/
 
-CSS code was validated through https://jigsaw.w3.org/css-validator/
+* CSS code was validated through https://jigsaw.w3.org/css-validator/
+
+### **Test Cases**
 
 
+### **Issues** 
 
-
-
-* **Issues**  
-    * At times, whilst previewing the site through port 8000 on gitpod and refreshing the page to update changed code, 
-the refresh might not always go through, and therefore one must 
-ctrl-click the refresh button for a forced refresh. 
-
+* At times, whilst opening browser through gitpod, the project shown may not be updated despite clicking on the refresh button. 
+    Therefore one must ctrl-click the refresh button for a forced refresh. 
 
 ---
 
-## Deployment
----
-* **Gitpod** 
-    * To preview site through gitpod, run the command "python3 -m http.server" in the terminal (without the quotes). 
-    * Executing this should prompt a pop up for port 8000
+# Deployment
+
+### **Gitpod** 
+
+* To preview site through gitpod, run the command "python3 -m http.server" in the terminal (without the quotes). 
+* Executing this should prompt a pop up for port 8080
     alongside the options to "Make Public" or "Open Browser". If it is the first time after opening gitpod, then click on "Make Public", and then "Open Browser" if the pop up
-    comes up again. If the pop up does not come, you may alternatively ctrl-click on the link that will be shown in the terminal for port 8000.
-    * Gitpod has no automatic saving, so saving after each change is optimal.
+    comes up again. If the pop up does not come, you may alternatively ctrl-click on the link that will be shown in the terminal for port 8080.
+* Gitpod has no automatic saving, so saving after each change is optimal.
 
 
-* **Github** 
-    * In order to commit, whilst still in gitpod, running the command git add . (or a specific file/folder instead of "." (without the quotes)),
+### **Github**
+* In order to commit, whilst still in gitpod, running the command git add . (or a specific file/folder instead of "." (without the quotes)),
     will add all the changes you have done to be prepared for a commit. 
-    * After this step, you may run the command git commit -m "your comment" (your comment being whatever message you want to convey alongside the commit). Running this will 
+* After this step, you may run the command git commit -m "your comment" (your comment being whatever message you want to convey alongside the commit). Running this will 
     show how much changes were done, through the terminal.
-    * Finally, running the command git push should put your changes and project into your repository.
+* Finally, running the command git push should put your changes and project into your repository.
+
+### **Heroku**
+* ds
 
 
 ---
 
-## Credits 
----
+# Credits 
+
 
 
 ---

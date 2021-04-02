@@ -18,10 +18,10 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/get_myRecipies")
-def get_myRecipies():
-    myRecipies = mongo.db.myRecipies.find()
-    return render_template("myRecipies.html", myRecipies=myRecipies)
+@app.route("/get_temps")
+def get_temps():
+    temps = mongo.db.temps.find()
+    return render_template("temps.html", temps=temps)
 
 
 if __name__ == "__main__":

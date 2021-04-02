@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+</head>
+<body>
+    {% for temp in temps %}
+        {{ temp.tools }}<br>
+        {{ temp.base }}<br>
+        {{ temp.ingredients }}<br>
+        {{ temp.preparation }}<br>
+    {% endfor %}
+</body>
+</html>
