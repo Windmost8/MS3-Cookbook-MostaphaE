@@ -15,17 +15,18 @@
     <title>reCook</title>
 </head>
 <body>
+    
 
     <!--materlize navbar-->
     <header>
         <!-- top navbar -->
 		<nav class="nav-extended text-shadow orange lighten-2">
 			<div class="nav-wrapper">
-				<a href="{{ url_for('get_temps') }}" class="center brand-logo">reCook <i class="fas fa-utensils"></i></a>
+				<a href="{{ url_for('get_recipies') }}" class="center brand-logo">reCook <i class="fas fa-utensils"></i></a>
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
 				<ul class="hide-on-med-and-down">
 					<li>
-                        <a href="{{ url_for('get_temps') }}"><i class="fas fa-home"></i> Home </a>
+                        <a href="{{ url_for('get_recipies') }}"><i class="fas fa-home"></i> Home </a>
                     </li>
                     {% if session.user %}
 					<li>
@@ -49,7 +50,7 @@
         <!-- mobile sidenav -->
 		<ul class="sidenav" id="mobile-demo">
             <li><h4 class="center-align orange lighten-2">Menu</h4></li>
-            <li><a href="{{ url_for('get_temps') }}">Home</a></li>
+            <li><a href="{{ url_for('get_recipies') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
@@ -59,6 +60,8 @@
             {% endif %}
 		</ul>
     </header>
+
+    
     
     <!--materlize typograpy class-->
     <blockquote><p class="flow-text">Welcome, friends and family alike! Welcome... to an online platform to not only FIND and SHARE recipies, or INSPECT various
@@ -68,10 +71,10 @@
     
 
     
-
-    
     {% block content %}
     {% endblock %}
+    
+    
 
     <!--materlize footer-->
     <footer class="page-footer orange lighten-2 text-shadow">

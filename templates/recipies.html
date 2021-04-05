@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <h3 class="light-blue-text text-darken-4 center-align">My Recipies</h3>
+
+    <ul class="collapsible">
+        {% for recipie in recipies %}
+        <li>
+            <div class="collapsible-header white-text orange lighten-2 darken-4 text-shadow">
+                <i class="fas fa-caret-down"></i>
+                <strong>{{ recipie.recipie_name }}</strong> : {{ recipie.ingredients }}
+            </div>
+            <div class="collapsible-body">
+                <strong>{{ recipie.category_name }}</strong>
+                <p>{{ recipie.recipie_name }}</p>
+                <p>{{ recipie.preparation }}</p>
+                <p>{{ recipie.ingredients }}</p>
+                <p>{{ recipie.special_tools }}</p>
+                <p><em>by: {{ recipie.created_by }}</em></p>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

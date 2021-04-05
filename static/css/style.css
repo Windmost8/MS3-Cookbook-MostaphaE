@@ -25,3 +25,7 @@ blockquote {
     color:rgb(29, 161, 242);
 }
 
+/*border color*/
+.border {
+    border:10px solid orange
+}

@@ -19,10 +19,10 @@ mongo = PyMongo(app)
 
 
 @app.route("/")
-@app.route("/get_temps")
-def get_temps():
-    temps = mongo.db.temps.find()
-    return render_template("temps.html", temps=temps)
+@app.route("/get_recipies")
+def get_recipies():
+    recipies = list(mongo.db.recipies.find())
+    return render_template("recipies.html", recipies=recipies)
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -97,6 +97,35 @@ def logout():
     flash("You have been logged out")
     session.pop("user")
     return redirect(url_for("login"))
+
+
+@app.route("/find")
+def find():
+    return render_template("find.html")
+
+
+@app.route("/manage")
+def manage():
+    return render_template("manage.html")
+
+
+@app.route("/add", methods=["GET", "POST"])
+def add():
+    if request.method == "POST":
+        recipe = {
+            "category_name": request.form.get("category_name"),
+            "recipe_name": request.form.get("recipe_name"),
+            "ingredients": request.form.get("ingredients"),
+            "preparation": request.form.get("preparation"),
+            "special_tools": request.form.get("special_tools"),
+            "created_by": session["user"]
+        }
+        mongo.db.recipies.insert_one(recipe)
+        flash("Recipe Added!")
+        return redirect(url_for("get_recipies"))
+
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("add.html", categories=categories)
 
 
 if __name__ == "__main__":
