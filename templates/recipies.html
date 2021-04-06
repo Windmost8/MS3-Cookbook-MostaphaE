@@ -1,22 +1,31 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <h3 class="light-blue-text text-darken-4 center-align">My Recipies</h3>
+    <h3 class="light-blue-text text-darken-4 center-align">My recipies</h3>
 
     <ul class="collapsible">
         {% for recipie in recipies %}
         <li>
-            <div class="collapsible-header white-text orange lighten-2 darken-4 text-shadow">
-                <i class="fas fa-caret-down"></i>
-                <strong>{{ recipie.recipie_name }}</strong> : {{ recipie.ingredients }}
+            <div class="collapsible-header white-text orange lighten-2 text-shadow">
+                <div class="col s3">
+                    <i class="fas fa-caret-down"></i>
+                    {% if session.user|lower == recipie.created_by|lower %}
+                    <a href="" class="btn-small green accent-4">Done</a>
+                    <a href="{{ url_for('delete_recipie', recipie_id=recipie._id) }}" class="btn-small green accent-4">Delete</a>
+                    <a href="{{ url_for('edit_recipie', recipie_id=recipie._id) }}" class="btn-small light-blue lighten-1">Edit</a>
+                    {% endif %}
+                </div>
+                <div class="col s9">
+                    <strong>{{ recipie.recipie_name }}</strong>
+                </div>
             </div>
             <div class="collapsible-body">
-                <strong>{{ recipie.category_name }}</strong>
-                <p>{{ recipie.recipie_name }}</p>
-                <p>{{ recipie.preparation }}</p>
-                <p>{{ recipie.ingredients }}</p>
-                <p>{{ recipie.special_tools }}</p>
-                <p><em>by: {{ recipie.created_by }}</em></p>
+                <p><i>Recipie Name:</i> <strong>{{ recipie.recipie_name }}</strong></p>
+                <p><i>Category:</i> <strong>{{ recipie.category_name }}</strong></p>
+                <p><i>Preparation:</i> <strong>{{ recipie.preparation }}</strong></p>
+                <p><i>Ingredients:</i> <strong>{{ recipie.ingredients }}</strong></p>
+                <p><i>Special Tools:</i> <strong>{{ recipie.special_tools }}</strong></p>
+                <p><em>By: <strong>{{ recipie.created_by }}</strong></em></p>
             </div>
         </li>
         {% endfor %}

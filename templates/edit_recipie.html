@@ -2,15 +2,19 @@
 {% block content %}
 
     <div class="row card-panel border">
-        <h3 class="text-darken-4 center-align"><i>Add Recipe</i></h3>
-        <form class="col s12" method="POST" action="{{ url_for('add') }}">
+        <h3 class="text-darken-4 center-align"><i>Edit Recipe</i></h3>
+        <form class="col s12" method="POST" action="{{ url_for('edit_recipie', recipie_id=recipie._id) }}">
 			<div class="row">
 				<div class="input-field col s12">
                     <i class="fas fa-hamburger prefix text-darken-4"></i>
 					<select id="category_name" name="category_name" class="validate" required>
                         <option value="" disabled selected>Choose Category</option>
                         {% for category in categories %}
-                            <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                            {% if category.category_name == recipie.category_name %}
+                                <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
+                            {% else %}
+                                <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+                            {% endif %}
                         {% endfor %}
                     </select>
 					<label for="category_name">Food Category</label>
@@ -20,14 +24,14 @@
                 <div class="input-field col s12">
                     <i class="fas fa-pencil-alt prefix text-darken-4"></i>
                     <input id="recipie_name" name="recipie_name" minlength="5" maxlength="50"
-                        type="text" class="validate" required>
+                        value="{{ recipie.recipie_name }}" type="text" class="validate" required>
                     <label for="recipie_name">Recipie Name</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="far fa-clipboard prefix text-darken-4"></i>
-                    <input id="ingredients" name="ingredients" type="text" class="validate" required>
+                    <input id="ingredients" name="ingredients" value="{{ recipie.ingredients }}" type="text" class="validate" required>
                     <label for="ingredients">Ingredients</label>
                 </div>
             </div>
@@ -35,22 +39,25 @@
                 <div class="input-field col s12">
                     <i class="fas fa-hands-wash prefix text-darken-4"></i>
                     <textarea id="preparation" name="preparation" minlength="5"
-                        maxlength="200" class="materialize-textarea validate" required></textarea>
+                        maxlength="200" class="materialize-textarea validate" required>{{- recipie.preparation -}}</textarea>
                     <label for="preparation">Preparation</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-tools prefix text-darken-4"></i>
-                    <input id="special_tools" name="special_tools" type="text">
+                    <input id="special_tools" name="special_tools" value="{{ recipie.special_tools }}" type="text">
                     <label for="special_tools">Special Tools</label>
                 </div>
             </div>
             
             <div class="row">
                 <div class="col s12 center-align">
+                    <a href="{{ url_for('get_recipies') }}" class="btn-large red text-shadow">
+                        Cancel <i class="fas fa-times-circle right"></i>
+                    </a>
                     <button type="submit" class="btn-large orange light-2 text-shadow">
-                        Add Recipie
+                        Edit Recipie
                     </button>
                 </div>
             </div>
@@ -58,4 +65,3 @@
     </div>
 
 {% endblock %}
-

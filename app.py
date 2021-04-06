@@ -104,28 +104,48 @@ def find():
     return render_template("find.html")
 
 
-@app.route("/manage")
-def manage():
-    return render_template("manage.html")
-
-
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == "POST":
-        recipe = {
+        recipie = {
             "category_name": request.form.get("category_name"),
-            "recipe_name": request.form.get("recipe_name"),
+            "recipie_name": request.form.get("recipie_name"),
             "ingredients": request.form.get("ingredients"),
             "preparation": request.form.get("preparation"),
             "special_tools": request.form.get("special_tools"),
             "created_by": session["user"]
         }
-        mongo.db.recipies.insert_one(recipe)
-        flash("Recipe Added!")
+        mongo.db.recipies.insert_one(recipie)
+        flash("Recipie Added!")
         return redirect(url_for("get_recipies"))
 
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add.html", categories=categories)
+
+
+@app.route("/edit_recipie/<recipie_id>", methods=["GET", "POST"])
+def edit_recipie(recipie_id):
+    if request.method == "POST":
+        submit = {
+            "category_name": request.form.get("category_name"),
+            "recipie_name": request.form.get("recipie_name"),
+            "ingredients": request.form.get("ingredients"),
+            "preparation": request.form.get("preparation"),
+            "special_tools": request.form.get("special_tools"),
+            "created_by": session["user"]
+        }
+        mongo.db.recipies.update({"_id": ObjectId(recipie_id)}, submit)
+        flash("recipie Successfully Updated")
+
+    recipie = mongo.db.recipies.find_one({"_id": ObjectId(recipie_id)})
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("edit_recipie.html", recipie=recipie, categories=categories)
+
+
+@app.route("/delete_recipie/<recipie_id>")
+def delete_recipie(recipie_id):
+    mongo.db.recipies.remove({"_id": ObjectId(recipie_id)})
+    return redirect(url_for("get_recipies"))
 
 
 if __name__ == "__main__":
