@@ -25,6 +25,13 @@ def get_recipies():
     return render_template("recipies.html", recipies=recipies)
 
 
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    recipies = list(mongo.db.recipies.find({"$text": {"$search": query}}))
+    return render_template("recipies.html", recipies=recipies)
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -146,6 +153,12 @@ def edit_recipie(recipie_id):
 def delete_recipie(recipie_id):
     mongo.db.recipies.remove({"_id": ObjectId(recipie_id)})
     return redirect(url_for("get_recipies"))
+
+
+@app.route("/get_categories")
+def get_categories():
+    categories = list(mongo.db.categories.find().sort("category_name", 1))
+    return render_template("categories.html", categories=categories)
 
 
 if __name__ == "__main__":
