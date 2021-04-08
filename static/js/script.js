@@ -7,7 +7,8 @@ $(document).ready(function () {
     $('.modal').modal();
     //scroll spy initilization not yet used  
     $('.scrollspy').scrollSpy();
-
+    //
+    $('#modal1').modal();
 
 //code institute materlize select form validation
 validateMaterializeSelect();
