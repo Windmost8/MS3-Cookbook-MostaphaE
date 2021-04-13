@@ -1,3 +1,16 @@
+/*materlize footer css*/
+main {
+    flex: 1 0 auto;
+}
+
+body {
+    background-color: aliceblue;
+    /*materlize footer css*/
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
 .text-shadow {
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
@@ -6,11 +19,7 @@
     line-height: 2;
 }
 
-body {
-    background-color: aliceblue;
-}
-
-blockquote {
+blockquote, h1 {
     text-align: center;
 }
 
@@ -29,3 +38,13 @@ blockquote {
 .border {
     border:10px solid orange
 }
+
+.smaller {
+    font-size: large;
+}
+
+.errorImg {
+    display:flex;
+    justify-content: center;
+}
+

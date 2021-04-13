@@ -32,9 +32,12 @@
 					<li>
                         <a href="{{ url_for('profile', username=session['user']) }}"><i class="fas fa-female"></i><i class="fas fa-male"></i> Profile</a>
                     </li>
+                    <li>
+                        <a href="{{ url_for('add') }}"><i class="fas fa-clipboard"></i> Add</a>
+                    </li>
                     {% if session.user|lower == "admin"|lower %}
                     <li>
-                        <a href="{{ url_for('get_categories') }}"><i class="fas fa-tasks"></i> Manage</a>
+                        <a href="{{ url_for('get_categories') }}"><i class="fas fa-tasks"></i> Admin</a>
                     </li>
                     {% endif %}
 					<li>
@@ -59,7 +62,7 @@
             {% if session.user %}
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
             {% if session.user|lower == "admin"|lower %}
-            <li><a href="{{ url_for('get_categories') }}"><i class="fas fa-tasks"></i> Manage</a></li>
+            <li><a href="{{ url_for('get_categories') }}">Manage</a></li>
             {% endif %}
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
@@ -69,20 +72,11 @@
 		</ul>
     </header>
 
-    
-    
-    <!--materlize typograpy class-->
-    <blockquote><p class="flow-text">Welcome, friends and family alike! Welcome... to an online platform to not only FIND and SHARE recipies, or INSPECT various
-        cooking tools, but to learn as we eat, or eat as we learn. Welcome one, welcome all! Enjoy.</p>
-    </blockquote>
-
-    
-
-    
     {% block content %}
     {% endblock %}
     
-    
+    <br>
+    <br>
 
     <!--materlize footer-->
     <footer class="page-footer orange lighten-2 text-shadow">
@@ -95,13 +89,13 @@
                     <h5 class="white-text">Links</h5>
                     <ul>
                         <li>
-                            <a class="grey-text text-lighten-3" href="https://www.twitter.com/" target="_blank"><i class="fab fa-twitter color3"></i></a>
+                            <a class="grey-text text-lighten-3" href="https://www.twitter.com/" target="_blank">Twitter <i class="fab fa-twitter color3"></i></a>
                         </li>
                         <li>
-                            <a class="grey-text text-lighten-3" href="https://www.youtube.com/" target="_blank"><i class="fab fa-youtube color1"></i></a>
+                            <a class="grey-text text-lighten-3" href="https://www.youtube.com/" target="_blank">Youtube <i class="fab fa-youtube color1"></i></a>
                         </li>
                         <li>
-                            <a class="grey-text text-lighten-3" href="https://www.facebook.com/" target="_blank"><i class="fab fa-facebook-f color2"></i></a>
+                            <a class="grey-text text-lighten-3" href="https://www.facebook.com/" target="_blank">Facebook <i class="fab fa-facebook-f color2"></i></a>
                         </li>
                         
                     </ul>
@@ -110,7 +104,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                © 2021 Copyright
+                © 2021 Copyright, reCook TM
             </div>
         </div>
     </footer>

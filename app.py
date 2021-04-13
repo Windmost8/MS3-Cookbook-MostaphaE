@@ -4,6 +4,7 @@ from flask import (
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from flask_login import current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
@@ -65,7 +66,6 @@ def login():
             {"username": request.form.get("username").lower()})
 
         if existing_user:
-            #if statement shows line too long error, but if fixed, shows indentation error instead
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
                         session["user"] = request.form.get("username").lower()
@@ -106,25 +106,28 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/find")
-def find():
-    return render_template("find.html")
+@app.route("/error")
+def error():
+    return render_template("error.html")
 
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
-    if request.method == "POST":
-        recipie = {
-            "category_name": request.form.get("category_name"),
-            "recipie_name": request.form.get("recipie_name"),
-            "ingredients": request.form.get("ingredients"),
-            "preparation": request.form.get("preparation"),
-            "special_tools": request.form.get("special_tools"),
-            "created_by": session["user"]
-        }
-        mongo.db.recipies.insert_one(recipie)
-        flash("Recipie Added!")
-        return redirect(url_for("get_recipies"))
+    if current_user.is_authenticated:
+        if request.method == "POST":
+            recipie = {
+                "category_name": request.form.get("category_name"),
+                "recipie_name": request.form.get("recipie_name"),
+                "ingredients": request.form.get("ingredients"),
+                "preparation": request.form.get("preparation"),
+                "special_tools": request.form.get("special_tools"),
+                "created_by": session["user"]
+            }
+            mongo.db.recipies.insert_one(recipie)
+            flash("Recipie Added!")
+            return redirect(url_for("get_recipies"))
+    else:
+        return render_template("error.html")
 
     categories = mongo.db.categories.find().sort("category_name", 1)
     return render_template("add.html", categories=categories)

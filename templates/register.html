@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
+<main>
     <div class="row">
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
             <div class="card">
@@ -51,5 +52,5 @@
             <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
         </div>
     </div>
-
+</main>
 {% endblock %}

@@ -5,9 +5,9 @@ $(document).ready(function () {
     $(".collapsible").collapsible();
     //materlize modal initialization
     $('.modal').modal();
-    //scroll spy initilization not yet used  
+    //materlize scroll spy initilization not yet used  
     $('.scrollspy').scrollSpy();
-    //
+    //materlize modal intilization
     $('#modal1').modal();
 
 //code institute materlize select form validation
@@ -38,4 +38,15 @@ validateMaterializeSelect();
             }
         });
     }
+});
+
+$(".toggle-password").click(function() {
+
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $($(this).attr("toggle"));
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
 });

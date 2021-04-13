@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
+<main>
     <div class="row card-panel border">
         <h3 class="text-darken-4 center-align"><i>Add Recipe</i></h3>
         <form class="col s12" method="POST" action="{{ url_for('add') }}">
@@ -26,7 +27,7 @@
             </div>
             <div class="row">
                 <div class="input-field col s12">
-                    <i class="far fa-clipboard prefix text-darken-4"></i>
+                    <i class="fas fa-pizza-slice prefix text-darken-4"></i>
                     <input id="ingredients" name="ingredients" type="text" class="validate" required>
                     <label for="ingredients">Ingredients</label>
                 </div>
@@ -49,13 +50,14 @@
             
             <div class="row">
                 <div class="col s12 center-align">
-                    <button type="submit" class="btn-large orange light-2 text-shadow">
+                    <button type="submit" class="btn-large green darken-2 text-shadow">
                         Add Recipie
                     </button>
                 </div>
             </div>
         </form>
     </div>
+</main>
 
 {% endblock %}
 
