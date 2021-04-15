@@ -68,11 +68,11 @@ def login():
         if existing_user:
             if check_password_hash(
                     existing_user["password"], request.form.get("password")):
-                        session["user"] = request.form.get("username").lower()
-                        flash("Welcome, {}".format(
-                            request.form.get("username")))
-                        return redirect(url_for(
-                            "profile", username=session["user"]))
+                session["user"] = request.form.get("username").lower()
+                flash("Welcome, {}".format(
+                        request.form.get("username")))
+                return redirect(url_for(
+                        "profile", username=session["user"]))
             else:
                 # invalid password match
                 flash("Incorrect Username and/or Password")
@@ -134,69 +134,87 @@ def add():
             "add.html", categories=categories, username=username
             )
     if not session["user"]:
-        return render_template("error.html")
+        return redirect(url_for("error"))
 
 
 @app.route("/edit_recipie/<recipie_id>", methods=["GET", "POST"])
 def edit_recipie(recipie_id):
-    if request.method == "POST":
-        submit = {
-            "category_name": request.form.get("category_name"),
-            "recipie_name": request.form.get("recipie_name"),
-            "ingredients": request.form.get("ingredients"),
-            "preparation": request.form.get("preparation"),
-            "special_tools": request.form.get("special_tools"),
-            "created_by": session["user"]
-        }
-        mongo.db.recipies.update({"_id": ObjectId(recipie_id)}, submit)
-        flash("recipie Successfully Updated")
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if session["user"]:
+        if request.method == "POST":
+            submit = {
+                "category_name": request.form.get("category_name"),
+                "recipie_name": request.form.get("recipie_name"),
+                "ingredients": request.form.get("ingredients"),
+                "preparation": request.form.get("preparation"),
+                "special_tools": request.form.get("special_tools"),
+                "created_by": session["user"]
+            }
+            mongo.db.recipies.update({"_id": ObjectId(recipie_id)}, submit)
+            flash("recipie Successfully Updated")
 
-    recipie = mongo.db.recipies.find_one({"_id": ObjectId(recipie_id)})
-    categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("edit_recipie.html", recipie=recipie, categories=categories)
+        recipie = mongo.db.recipies.find_one({"_id": ObjectId(recipie_id)})
+        categories = mongo.db.categories.find().sort("category_name", 1)
+        return render_template("edit_recipie.html", recipie=recipie, categories=categories, username=username)
 
 
 @app.route("/delete_recipie/<recipie_id>")
 def delete_recipie(recipie_id):
-    mongo.db.recipies.remove({"_id": ObjectId(recipie_id)})
-    return redirect(url_for("get_recipies"))
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if session["user"]:
+        mongo.db.recipies.remove({"_id": ObjectId(recipie_id)})
+        return redirect(url_for("get_recipies"))
 
 
 @app.route("/get_categories")
 def get_categories():
-    categories = list(mongo.db.categories.find().sort("category_name", 1))
-    return render_template("categories.html", categories=categories)
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if session["user"]:
+        categories = list(mongo.db.categories.find().sort("category_name", 1))
+        return render_template("categories.html", categories=categories)
 
 
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
-    if request.method == "POST":
-        category = {
-            "category_name": request.form.get("category_name")
-        }
-        mongo.db.categories.insert_one(category)
-        return redirect(url_for("get_categories"))
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if session["user"]:
+        if request.method == "POST":
+            category = {
+                "category_name": request.form.get("category_name")
+            }
+            mongo.db.categories.insert_one(category)
+            return redirect(url_for("get_categories"))
 
-    return render_template("add_category.html")
+        return render_template("add_category.html")
 
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
-    if request.method == "POST":
-        submit = {
-            "category_name": request.form.get("category_name")
-        }
-        mongo.db.categories.update({"_id": ObjectId(category_id)}, submit)
-        return redirect(url_for("get_categories"))
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if session["user"]:
+        if request.method == "POST":
+            submit = {
+                "category_name": request.form.get("category_name")
+            }
+            mongo.db.categories.update({"_id": ObjectId(category_id)}, submit)
+            return redirect(url_for("get_categories"))
 
-    category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
-    return render_template("edit_category.html", category=category)
+        category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+        return render_template("edit_category.html", category=category)
 
 
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
-    mongo.db.categories.remove({"_id": ObjectId(category_id)})
-    return redirect(url_for("get_categories"))
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if session["user"]:
+        mongo.db.categories.remove({"_id": ObjectId(category_id)})
+        return redirect(url_for("get_categories"))
 
 
 if __name__ == "__main__":

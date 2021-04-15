@@ -78,6 +78,7 @@ and the inclusion of screenshots.
 * Lighthouse Audits
 * Github
 * Gitpod
+* Pylint
 * Heroku
 * Jinja
 * dnspython
