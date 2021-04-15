@@ -1,10 +1,10 @@
-# MS3 
-# Online Cookbook Recipe & Tool Sharing!
+# MS3 - Online Cookbook Recipe & Tool Sharing!
 This site is intended for people to not only **FIND** recipes, but also **SHARE** their own, 
 whilst simultaneously **INSPECTING** various cooking tools that can help with these fantastic cooking moments!
 Thus, this site will aim to provide users with all they need to achieve their ideal meal.
 
 ---
+
 # UX
 
 In terms of User Stories, this site behaves differently depending if the user is registered with the site, or is an anonymus visiter.
@@ -79,13 +79,33 @@ and the inclusion of screenshots.
 * Github
 * Gitpod
 * Heroku
+* Jinja
 * dnspython
 * Flask-pymongo
 * Fontawesome
 * Jquery
 * Werkzeug
+* Flask-login
 
 Additional technologies/installs may be observed in the requirements.txt file located in the directory, or accessed through here; https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/39c2cf5fe35dca38f12ab4fad3b0c562eef14493/requirements.txt
+
+* pip3 install flask
+* pip3 install flask-pymongo
+* pip3 install dnspython
+* pip3 install flask-login
+
+* import os
+* from flask import (
+    Flask, flash, render_template,
+    redirect, request, session, url_for)
+* from flask_pymongo import PyMongo
+* from bson.objectid import ObjectId
+* from flask_login import current_user
+* from werkzeug.security import generate_password_hash, check_password_hash
+* if os.path.exists("env.py"): 
+    import env
+
+Also to be noted is the pep8 compliance required.
 
 ---
 
@@ -99,6 +119,11 @@ The reason for an aliceblue background was just as a contrast against the orange
 
 In addition, a text-shadow css class wa put in place to allow texts to be shown easier for the eyes against colorful backgrounds, which in this case was orange again.
 Also, the text itself is white in color for it to also stand out despite the orange background.
+
+Buttons found on the site can either be green or red, often indicating its nature. Red meaning something will be removed or deleted, and green indicating whatever else otherwise.
+In addition, the recipies themselves are shown with a brown header, once again to contrast the orange and distinguish itself, whilst still being somewhat similiar to the orange theme.
+
+---
 
 # Testing
 
@@ -145,8 +170,13 @@ Such as;
 * Finally, running the command git push should put your changes and project into your repository.
 
 ### **Heroku**
-* ds
-
+* Deployment on Heroku was done through their official website https://www.heroku.com/. One must intially create an app name on Heroku, and 
+then we connect that app to our github project respository. For this project, automatic deployment was used from the Heroku site.
+Once you have connceted your git repo with heroku, you should then access the settings and "reveal config vars". Here we can securely tell heroku
+which variables are required for deployment, such as (in our case); IP, PORT, SECRET_KEY, 
+MONGO_URI, MONGO_DBNAME (and their relevant values). Once that is done, we may then enable automatic deployment, and then finally, with the correctly selected branch,
+you cann "deploy branch". Now the deployed site should be available and automically updated via our git commits.
+Additionally, the requirements.txt file must be constantly updated if any new installs were used, so that heroku knows.
 
 ---
 

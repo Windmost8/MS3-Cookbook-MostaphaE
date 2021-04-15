@@ -113,7 +113,9 @@ def error():
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
-    if current_user.is_authenticated:
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if session["user"]:
         if request.method == "POST":
             recipie = {
                 "category_name": request.form.get("category_name"),
@@ -126,11 +128,13 @@ def add():
             mongo.db.recipies.insert_one(recipie)
             flash("Recipie Added!")
             return redirect(url_for("get_recipies"))
-    else:
-        return render_template("error.html")
 
-    categories = mongo.db.categories.find().sort("category_name", 1)
-    return render_template("add.html", categories=categories)
+        categories = mongo.db.categories.find().sort("category_name", 1)
+        return render_template(
+            "add.html", categories=categories, username=username
+            )
+    if not session["user"]:
+        return render_template("error.html")
 
 
 @app.route("/edit_recipie/<recipie_id>", methods=["GET", "POST"])
