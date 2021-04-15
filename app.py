@@ -22,12 +22,18 @@ mongo = PyMongo(app)
 @app.route("/")
 @app.route("/get_recipies")
 def get_recipies():
+    """
+    This will fetch recipies created/pre included in the Mongo database and create a list to be shown on recipies.html
+    """
     recipies = list(mongo.db.recipies.find())
     return render_template("recipies.html", recipies=recipies)
 
 
 @app.route("/search", methods=["GET", "POST"])
 def search():
+    """
+    This is the search bar functionality that will find from the mongo database
+    """
     query = request.form.get("query")
     recipies = list(mongo.db.recipies.find({"$text": {"$search": query}}))
     return render_template("recipies.html", recipies=recipies)
@@ -35,6 +41,11 @@ def search():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    This will check user authentication and creation,
+    whether a certain username/password exists in the mongo databse,
+    and then finally adds them into the session cookie for the site.
+    """
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one(
@@ -60,6 +71,11 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    """
+    Similiar to the register app above,
+    this will check whether the form values are correct/found in the database
+    in order to log in to the site.
+    """
     if request.method == "POST":
         # check if username exists in db
         existing_user = mongo.db.users.find_one(
@@ -88,6 +104,9 @@ def login():
 
 @app.route("/profile/<username>", methods=["GET", "POST"])
 def profile(username):
+    """
+    A profile page that shows the current session user's username
+    """
     # grab the session user's username from db
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
@@ -100,6 +119,9 @@ def profile(username):
 
 @app.route("/logout")
 def logout():
+    """
+    Logout functionality, popping the session user cookie.
+    """
     # remove user from session cookie
     flash("You have been logged out")
     session.pop("user")
@@ -108,11 +130,19 @@ def logout():
 
 @app.route("/error")
 def error():
+    """
+    An error page for redirection
+    purposes at user authentication/anonymys users.
+    """
     return render_template("error.html")
 
 
 @app.route("/add", methods=["GET", "POST"])
 def add():
+    """
+    Creation of recipies updated into the mongo database from the site form.
+    Also showcased on the site
+    """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
@@ -139,6 +169,10 @@ def add():
 
 @app.route("/edit_recipie/<recipie_id>", methods=["GET", "POST"])
 def edit_recipie(recipie_id):
+    """
+    Edit functionality by user for existing recipies.
+    This updates the mongo database
+    """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
@@ -161,6 +195,10 @@ def edit_recipie(recipie_id):
 
 @app.route("/delete_recipie/<recipie_id>")
 def delete_recipie(recipie_id):
+    """
+    Delete functinoality, removing the recipie in question
+    from the mongo database.
+    """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
@@ -170,6 +208,11 @@ def delete_recipie(recipie_id):
 
 @app.route("/get_categories")
 def get_categories():
+    """
+    This fetches existing and created categories
+    from the mongo database
+    and showcases them on categories.html
+    """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
@@ -179,6 +222,9 @@ def get_categories():
 
 @app.route("/add_category", methods=["GET", "POST"])
 def add_category():
+    """
+    Add functionality to the categories
+    """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
@@ -194,6 +240,10 @@ def add_category():
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
 def edit_category(category_id):
+    """
+    similar to the add functinality of categories
+    but instead edit functionality
+    """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
@@ -210,6 +260,10 @@ def edit_category(category_id):
 
 @app.route("/delete_category/<category_id>")
 def delete_category(category_id):
+    """
+    Delete functinality for categories
+    removing them from the database
+    """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
     if session["user"]:
