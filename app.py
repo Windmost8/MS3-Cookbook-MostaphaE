@@ -213,10 +213,9 @@ def get_categories():
     from the mongo database
     and showcases them on categories.html
     """
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-
     if not session.get("user") is None:
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
         if username == "admin":
             categories = list(mongo.db.categories.find().sort(
                 "category_name", 1))
@@ -232,10 +231,9 @@ def add_category():
     """
     Add functionality to the categories
     """
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-
     if not session.get("user") is None:
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
         if username == "admin":
             if request.method == "POST":
                 category = {
@@ -257,10 +255,9 @@ def edit_category(category_id):
     similar to the add functinality of categories
     but instead edit functionality
     """
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-
     if not session.get("user") is None:
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
         if username == "admin":
             if request.method == "POST":
                 submit = {
