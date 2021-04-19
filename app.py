@@ -1,10 +1,21 @@
+"""
+flask is used our app connections,
+and from flask we import various others
+used in our project, such as the session
+for users, url_for for our html.
+
+From bson.objectid, this is used in order
+to easily utilize an id from our mongo db
+in order to use in our app.
+
+Werkzeug is used for its password security.
+"""
 import os
 from flask import (
     Flask, flash, render_template,
     redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
-from flask_login import current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 if os.path.exists("env.py"):
     import env
@@ -23,7 +34,8 @@ mongo = PyMongo(app)
 @app.route("/get_recipies")
 def get_recipies():
     """
-    This will fetch recipies created/pre included in the Mongo database and create a list to be shown on recipies.html
+    This will fetch recipies created/pre included in the Mongo
+    database and create a list to be shown on recipies.html
     """
     recipies = list(mongo.db.recipies.find())
     return render_template("recipies.html", recipies=recipies)
@@ -128,24 +140,14 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/error")
-def error():
-    """
-    An error page for redirection
-    purposes at user authentication/anonymys users.
-    """
-    return render_template("error.html")
-
-
 @app.route("/add", methods=["GET", "POST"])
 def add():
     """
     Creation of recipies updated into the mongo database from the site form.
     Also showcased on the site
     """
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    if session["user"]:
+    if not session.get("user") is None:
+
         if request.method == "POST":
             recipie = {
                 "category_name": request.form.get("category_name"),
@@ -159,12 +161,12 @@ def add():
             flash("Recipie Added!")
             return redirect(url_for("get_recipies"))
 
-        categories = mongo.db.categories.find().sort("category_name", 1)
-        return render_template(
-            "add.html", categories=categories, username=username
-            )
-    if not session["user"]:
-        return redirect(url_for("error"))
+    else:
+        return render_template("error.html")
+
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template(
+        "add.html", categories=categories)
 
 
 @app.route("/edit_recipie/<recipie_id>", methods=["GET", "POST"])
@@ -173,9 +175,7 @@ def edit_recipie(recipie_id):
     Edit functionality by user for existing recipies.
     This updates the mongo database
     """
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    if session["user"]:
+    if not session.get("user") is None:
         if request.method == "POST":
             submit = {
                 "category_name": request.form.get("category_name"),
@@ -187,10 +187,13 @@ def edit_recipie(recipie_id):
             }
             mongo.db.recipies.update({"_id": ObjectId(recipie_id)}, submit)
             flash("recipie Successfully Updated")
+    else:
+        return render_template("error.html")
 
-        recipie = mongo.db.recipies.find_one({"_id": ObjectId(recipie_id)})
-        categories = mongo.db.categories.find().sort("category_name", 1)
-        return render_template("edit_recipie.html", recipie=recipie, categories=categories, username=username)
+    recipie = mongo.db.recipies.find_one({"_id": ObjectId(recipie_id)})
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template(
+        "edit_recipie.html", recipie=recipie, categories=categories)
 
 
 @app.route("/delete_recipie/<recipie_id>")
@@ -199,11 +202,8 @@ def delete_recipie(recipie_id):
     Delete functinoality, removing the recipie in question
     from the mongo database.
     """
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    if session["user"]:
-        mongo.db.recipies.remove({"_id": ObjectId(recipie_id)})
-        return redirect(url_for("get_recipies"))
+    mongo.db.recipies.remove({"_id": ObjectId(recipie_id)})
+    return redirect(url_for("get_recipies"))
 
 
 @app.route("/get_categories")
@@ -215,9 +215,16 @@ def get_categories():
     """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    if session["user"]:
-        categories = list(mongo.db.categories.find().sort("category_name", 1))
-        return render_template("categories.html", categories=categories)
+
+    if not session.get("user") is None:
+        if username == "admin":
+            categories = list(mongo.db.categories.find().sort(
+                "category_name", 1))
+            return render_template("categories.html", categories=categories)
+        else:
+            return render_template("error.html")
+    else:
+        return render_template("error.html")
 
 
 @app.route("/add_category", methods=["GET", "POST"])
@@ -227,15 +234,21 @@ def add_category():
     """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    if session["user"]:
-        if request.method == "POST":
-            category = {
-                "category_name": request.form.get("category_name")
-            }
-            mongo.db.categories.insert_one(category)
-            return redirect(url_for("get_categories"))
 
-        return render_template("add_category.html")
+    if not session.get("user") is None:
+        if username == "admin":
+            if request.method == "POST":
+                category = {
+                    "category_name": request.form.get("category_name")
+                }
+                mongo.db.categories.insert_one(category)
+                return redirect(url_for("get_categories"))
+
+            return render_template("add_category.html")
+        else:
+            return render_template("error.html")
+    else:
+        return render_template("error.html")
 
 
 @app.route("/edit_category/<category_id>", methods=["GET", "POST"])
@@ -246,16 +259,24 @@ def edit_category(category_id):
     """
     username = mongo.db.users.find_one(
         {"username": session["user"]})["username"]
-    if session["user"]:
-        if request.method == "POST":
-            submit = {
-                "category_name": request.form.get("category_name")
-            }
-            mongo.db.categories.update({"_id": ObjectId(category_id)}, submit)
-            return redirect(url_for("get_categories"))
 
-        category = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
-        return render_template("edit_category.html", category=category)
+    if not session.get("user") is None:
+        if username == "admin":
+            if request.method == "POST":
+                submit = {
+                    "category_name": request.form.get("category_name")
+                }
+                mongo.db.categories.update(
+                    {"_id": ObjectId(category_id)}, submit)
+                return redirect(url_for("get_categories"))
+
+            category = mongo.db.categories.find_one(
+                {"_id": ObjectId(category_id)})
+            return render_template("edit_category.html", category=category)
+        else:
+            return render_template("error.html")
+    else:
+        return render_template("error.html")
 
 
 @app.route("/delete_category/<category_id>")
@@ -264,11 +285,17 @@ def delete_category(category_id):
     Delete functinality for categories
     removing them from the database
     """
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
-    if session["user"]:
-        mongo.db.categories.remove({"_id": ObjectId(category_id)})
-        return redirect(url_for("get_categories"))
+    mongo.db.categories.remove({"_id": ObjectId(category_id)})
+    return redirect(url_for("get_categories"))
+
+
+@app.route("/error")
+def error():
+    """
+    An error page for redirection
+    purposes at user authentication/anonymys users.
+    """
+    return render_template("error.html")
 
 
 if __name__ == "__main__":

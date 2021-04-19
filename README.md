@@ -1,6 +1,5 @@
-# MS3 - Online Cookbook Recipe & Tool Sharing!
-This site is intended for people to not only **FIND** recipes, but also **SHARE** their own, 
-whilst simultaneously **INSPECTING** various cooking tools that can help with these fantastic cooking moments!
+# MS3 - Online Cookbook Recipe Platform
+This site is intended for people to not only **FIND** recipes, but also **SHARE** their own.
 Thus, this site will aim to provide users with all they need to achieve their ideal meal.
 
 ---
@@ -13,7 +12,7 @@ And so, as such, the user stories differ.
 ### **Anonymus User**
 
 * *I want to find/search for recipes*
-* *Perhaps there are tools that will help me with my cooking?*
+* *Who are the recipies made by?*
 * *What do I gain from creating an account?*
 
 ### **Registered User** 
@@ -86,14 +85,13 @@ and the inclusion of screenshots.
 * Fontawesome
 * Jquery
 * Werkzeug
-* Flask-login
+
 
 Additional technologies/installs may be observed in the requirements.txt file located in the directory, or accessed through here; https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/39c2cf5fe35dca38f12ab4fad3b0c562eef14493/requirements.txt
 
 * pip3 install flask
 * pip3 install flask-pymongo
 * pip3 install dnspython
-* pip3 install flask-login
 
 * import os
 * from flask import (
@@ -101,7 +99,6 @@ Additional technologies/installs may be observed in the requirements.txt file lo
     redirect, request, session, url_for)
 * from flask_pymongo import PyMongo
 * from bson.objectid import ObjectId
-* from flask_login import current_user
 * from werkzeug.security import generate_password_hash, check_password_hash
 * if os.path.exists("env.py"): 
     import env
