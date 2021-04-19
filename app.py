@@ -119,14 +119,17 @@ def profile(username):
     """
     A profile page that shows the current session user's username
     """
-    # grab the session user's username from db
-    username = mongo.db.users.find_one(
-        {"username": session["user"]})["username"]
+    if not session.get("user") is None:
+        # grab the session user's username from db
+        username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
 
-    if session["user"]:
-        return render_template("profile.html", username=username)
+        if session["user"]:
+            return render_template("profile.html", username=username)
 
-    return redirect(url_for("login"))
+        return redirect(url_for("login"))
+    else:
+        return render_template("error.html")
 
 
 @app.route("/logout")
