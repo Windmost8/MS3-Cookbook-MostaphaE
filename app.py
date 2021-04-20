@@ -178,20 +178,26 @@ def edit_recipie(recipie_id):
     Edit functionality by user for existing recipies.
     This updates the mongo database
     """
-    if not session.get("user") is None:
-        if request.method == "POST":
-            submit = {
-                "category_name": request.form.get("category_name"),
-                "recipie_name": request.form.get("recipie_name"),
-                "ingredients": request.form.get("ingredients"),
-                "preparation": request.form.get("preparation"),
-                "special_tools": request.form.get("special_tools"),
-                "created_by": session["user"]
-            }
-            mongo.db.recipies.update({"_id": ObjectId(recipie_id)}, submit)
-            flash("recipie Successfully Updated")
-    else:
+    recipie = mongo.db.recipies.find_one({"_id": ObjectId(recipie_id)})
+    if session.get("user") is None:
         return render_template("error.html")
+    if recipie is None:
+        return render_template("error.html")
+    username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+    if session["user"] != recipie["created_by"] or username == "admin":
+        return render_template("error.html")
+    if request.method == "POST":
+        submit = {
+            "category_name": request.form.get("category_name"),
+            "recipie_name": request.form.get("recipie_name"),
+            "ingredients": request.form.get("ingredients"),
+            "preparation": request.form.get("preparation"),
+            "special_tools": request.form.get("special_tools"),
+            "created_by": session["user"]
+        }
+        mongo.db.recipies.update({"_id": ObjectId(recipie_id)}, submit)
+        flash("recipie Successfully Updated")
 
     recipie = mongo.db.recipies.find_one({"_id": ObjectId(recipie_id)})
     categories = mongo.db.categories.find().sort("category_name", 1)
@@ -258,23 +264,25 @@ def edit_category(category_id):
     similar to the add functinality of categories
     but instead edit functionality
     """
-    if not session.get("user") is None:
-        username = mongo.db.users.find_one(
-            {"username": session["user"]})["username"]
-        if username == "admin":
-            if request.method == "POST":
-                submit = {
-                    "category_name": request.form.get("category_name")
-                }
-                mongo.db.categories.update(
-                    {"_id": ObjectId(category_id)}, submit)
-                return redirect(url_for("get_categories"))
+    categories = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+    if session.get("user") is None:
+        return render_template("error.html")
+    if categories is None:
+        return render_template("error.html")
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if username == "admin":
+        if request.method == "POST":
+            submit = {
+                "category_name": request.form.get("category_name")
+            }
+            mongo.db.categories.update(
+                {"_id": ObjectId(category_id)}, submit)
+            return redirect(url_for("get_categories"))
 
-            category = mongo.db.categories.find_one(
-                {"_id": ObjectId(category_id)})
-            return render_template("edit_category.html", category=category)
-        else:
-            return render_template("error.html")
+        category = mongo.db.categories.find_one(
+            {"_id": ObjectId(category_id)})
+        return render_template("edit_category.html", category=category)
     else:
         return render_template("error.html")
 
