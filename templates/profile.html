@@ -11,6 +11,7 @@
                 <div class="center">
                     <!--materlize buttons-->
                     <a href="{{ url_for('add') }}" class="waves-effect waves-light btn-large green darken-2 text-shadow">Add</a>
+                    <a href="{{ url_for('get_recipies') }}" class="waves-effect waves-light btn-large green darken-2 text-shadow">Browse</a>
                     {% if session.user|lower == "admin"|lower %}
                     <a href="{{ url_for('get_categories') }}" class="waves-effect waves-light btn-large green darken-2 text-shadow">Manage Categories</a>
                     {% endif %}

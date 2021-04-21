@@ -58,6 +58,8 @@ def register():
     whether a certain username/password exists in the mongo databse,
     and then finally adds them into the session cookie for the site.
     """
+    if not session.get("user") is None:
+        return redirect(url_for("get_recipies"))
     if request.method == "POST":
         # check if username already exists in db
         existing_user = mongo.db.users.find_one(
@@ -88,6 +90,8 @@ def login():
     this will check whether the form values are correct/found in the database
     in order to log in to the site.
     """
+    if not session.get("user") is None:
+        return redirect(url_for("add"))
     if request.method == "POST":
         # check if username exists in db
         existing_user = mongo.db.users.find_one(
@@ -185,7 +189,7 @@ def edit_recipie(recipie_id):
         return render_template("error.html")
     username = mongo.db.users.find_one(
             {"username": session["user"]})["username"]
-    if session["user"] != recipie["created_by"] or username == "admin":
+    if session["user"] != recipie["created_by"] and username != "admin":
         return render_template("error.html")
     if request.method == "POST":
         submit = {

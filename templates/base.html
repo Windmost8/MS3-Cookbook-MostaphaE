@@ -22,7 +22,7 @@
         <!-- top navbar -->
 		<nav class="nav-extended text-shadow orange lighten-2">
 			<div class="nav-wrapper">
-				<a href="{{ url_for('get_recipies') }}" class="center brand-logo">reCook <i class="fas fa-utensils"></i></a>
+				<a href="{{ url_for('get_recipies') }}" class="center brand-logo">reCook</a>
 				<a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="fas fa-bars"></i></a>
 				<ul class="hide-on-med-and-down">
 					<li>
@@ -36,9 +36,9 @@
                         <a href="{{ url_for('add') }}"><i class="fas fa-clipboard"></i> Add</a>
                     </li>
                     {% if session.user|lower == "admin"|lower %}
-                    <li>
-                        <a href="{{ url_for('get_categories') }}"><i class="fas fa-tasks"></i> Admin</a>
-                    </li>
+                        <li>
+                            <a href="{{ url_for('get_categories') }}"><i class="fas fa-tasks"></i> Admin</a>
+                        </li>
                     {% endif %}
 					<li>
                         <a href="{{ url_for('logout') }}"><i class="fas fa-times"></i> Log Out</a>
@@ -62,7 +62,7 @@
             {% if session.user %}
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
             {% if session.user|lower == "admin"|lower %}
-            <li><a href="{{ url_for('get_categories') }}">Manage</a></li>
+                <li><a href="{{ url_for('get_categories') }}">Manage</a></li>
             {% endif %}
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
@@ -84,6 +84,8 @@
             <div class="row">
                 <div class="col l6 s12">
                     <h5 class="white-text">Want to Socialize? Let's Connect!</h5>
+                    <h6 class="white-text">Explore our links to find out more.</h6>
+                    <a href="{{ url_for('get_recipies') }}"><h4 class="white-text">reCook, TM</h4></a>
                 </div>
                 <div class="col l4 offset-l2 s12">
                     <h5 class="white-text">Links</h5>
@@ -104,7 +106,7 @@
         </div>
         <div class="footer-copyright">
             <div class="container">
-                © 2021 Copyright, reCook TM
+                © 2021 Copyright
             </div>
         </div>
     </footer>

@@ -19,10 +19,6 @@ body {
     line-height: 2;
 }
 
-blockquote, h1 {
-    text-align: center;
-}
-
 /*colors for social media links*/
 .color1 {
     color:rgb(255,0,0);
@@ -43,8 +39,20 @@ blockquote, h1 {
     font-size: large;
 }
 
-.errorImg {
+.errorImg, .btnflex {
     display:flex;
     justify-content: center;
+}
+
+.ps {
+    font-size: 20px;
+}
+
+.errorTyp{
+    text-align: center;
+}
+
+.space {
+    margin:5px;
 }
 
