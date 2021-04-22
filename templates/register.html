@@ -6,15 +6,14 @@
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
             <div class="card">
                 <div class="card-image">
-                <a href="https://thumbs.dreamstime.com/b/asian-food-cooking-wok-noodles-chicken-stir-fry-vegetables-ingredients-spices-sauces-chopsticks-dark-rustic-83701227.jpg" target="_blank">
-                    <img src="https://thumbs.dreamstime.com/b/asian-food-cooking-wok-noodles-chicken-stir-fry-vegetables-ingredients-spices-sauces-chopsticks-dark-rustic-83701227.jpg" alt="stock cooking image">
-                </a>                    
-                <span class="card-title">Registration</span>
-                    <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+                    <img class="materialboxed" src="https://thumbs.dreamstime.com/b/asian-food-cooking-wok-noodles-chicken-stir-fry-vegetables-ingredients-spices-sauces-chopsticks-dark-rustic-83701227.jpg" alt="stock cooking image">
+                    <span class="card-title">Registration</span>
                 </div>
                 <div class="card-content">
-                    <p class="center-align"><i>Don't have an account? Well let's get you started!<br>Already have an account?
+                    <p class="center-align"><i>Already have an account?
                     Click here to <a href="{{ url_for('login') }}">sign in</a>.</i></p>
+                    <br>
+                    <p class="center-align">(Please <b>note</b> that your username/password must be between 5-15 characters.</p>
                 </div>
                 <div class="row">
                     <div class="input-field col s12">
@@ -39,18 +38,6 @@
                 </div>
             </div>
         </form>
-    </div>
-
-    <!--materlize Modal Trigger-->
-    <a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <h4>Modal Header</h4>
-            <p>A bunch of text</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
-        </div>
     </div>
 </main>
 {% endblock %}

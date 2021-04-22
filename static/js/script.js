@@ -7,8 +7,10 @@ $(document).ready(function () {
     $('.modal').modal();
     //materlize scroll spy initilization not yet used  
     $('.scrollspy').scrollSpy();
-    //materlize modal intilization
-    $('#modal1').modal();
+    //materlize image interactivity
+    $('.materialboxed').materialbox();
+    //flash message timer
+    $("#flashtimer").delay(4000).slideUp(200);
 
 //code institute materlize select form validation
 validateMaterializeSelect();

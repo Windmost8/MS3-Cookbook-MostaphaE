@@ -17,28 +17,35 @@
     <h6 class="text-darken-4 center-align">(<b>Click</b> on a recipie name listed below to view! Alternatively <b>search</b> 
         for any recipie names or ingredients.)</h6>
     <h6 class="text-darken-4 center-align">Or perhaps you would rather <a href="{{ url_for('login') }}">add </a>your own?</h6>
-    <h6 class="text-darken-4 center-align"><i class="fas fa-exclamation-circle orange-text"></i> Indicates your own recipies.</h6>
+    <h6 class="text-darken-4 center-align">The <i class="fas fa-pen-square orange-text"></i> symbol indicates your own recipies.</h6>
 
     <br>
 
-    <div class="row grey lighten-5">
+    <!--search bar form-->
+    <div class="row maincolor">
         <form action="{{ url_for('search') }}" method="post" class="col s12">
             <div class="row valign-wrapper center-align">
                 <div class="input-field col s12 m12">
                     <i class="fas fa-search prefix text-darken-4"></i>
-                    <input type="text" name="query" id="query" minlength="3" class="validate" required>
+                    <input type="text" name="query" id="query" minlength="3" class="validate scrollspy" required>
                     <label for="query">Search</label>
                 </div>
             </div>
-            <div class="btnflex">
-                <a href="{{ url_for('get_recipies') }}" class="red btn text-shadow space">Reset</a>
+            <div class="flexcenter">
+                <a href="{{ url_for('get_recipies') }}" class="red btn text-shadow space"><i class="fas fa-times-circle"></i> Reset</a>
                 <button type="submit" class="green darken-1 btn text-shadow space">
-                    Find
+                    <i class="fas fa-search prefix text-darken-4"></i> Find
                 </button>
             </div>
         </form>
     </div>
 
+    <!--materlize scrollspy-->
+    <div>
+        <a href="#footersc" class="orange btn text-shadow"><i class="fas fa-arrow-down"></i> To Bottom</a>
+    </div>
+
+    <!--recipies view-->
     <!--the special character ">" shows as a problem, but &gt; does not work instead-->
     {% if recipies|length > 0 %}
     <ul class="collapsible">
@@ -52,7 +59,7 @@
                     <strong>{{ recipie.recipie_name }}</strong>
                 </div>
                 {% if (session.user|lower == recipie.created_by|lower or session.user|lower == "admin"|lower)  %}
-                    <i class="fas fa-exclamation-circle orange-text"></i>
+                    <i class="fas fa-pen-square orange-text"></i>
                 {% endif %}
             </div>
             <div class="collapsible-body">
@@ -63,17 +70,35 @@
                 <p><strong>Special Tools:</strong><i> {{ recipie.special_tools }}</i></p>
                 <p><strong>By:</strong><i> {{ recipie.created_by }}</i></p>
                 {% if (session.user|lower == recipie.created_by|lower or session.user|lower == "admin"|lower)  %}
-                    <a href="{{ url_for('delete_recipie', recipie_id=recipie._id) }}" title="delete" class="delete btn-small red" 
-                    onclick="return confirm('Are you sure you want to delete this item')">Delete</a>
-                    <a href="{{ url_for('edit_recipie', recipie_id=recipie._id) }}" class="btn-small green darken-1">Edit</a>
+                    <a href="#{{ loop.index }}" title="delete" class="delete btn-small red modal-trigger"><i class="fas fa-trash"></i> Delete</a>
+                    <a href="{{ url_for('edit_recipie', recipie_id=recipie._id) }}" class="btn-small green darken-1"><i class="fas fa-edit"></i> Edit</a>
                 {% endif %}
             </div>
         </li>
+
+        <!-- materlize Modal Structure -->
+        <div id="{{ loop.index }}" class="modal">
+            <div class="modal-content">
+                <h4>Warning!</h4>
+                <p>Are you sure you want to delete this?</p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="modal-close btn-small red"><i class="fas fa-times-circle"></i> Cancel</a>
+                <a href="{{ url_for('delete_recipie', recipie_id=recipie._id) }}" class="modal-close btn-small green darken-1">
+                    <i class="fas fa-trash"></i> Agree
+                </a>
+            </div>
+        </div>
+
         {% endfor %}
     </ul>
     {% else %}
         <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
     {% endif %}
-    
+
+    <!--materlize scrollspy-->
+    <div class="btnup">
+        <a href="#query" class="orange btn text-shadow">Back Top <i class="fas fa-arrow-up"></i></a>
+    </div>
 </main>    
 {% endblock %}
