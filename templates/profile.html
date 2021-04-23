@@ -26,11 +26,11 @@
                 <div class="card-content">
                     <div class="center">
                         <!--materlize buttons-->
-                        <a href="{{ url_for('add') }}" class="waves-effect waves-light btn-large green darken-2 text-shadow space">Add</a>
-                        <a href="{{ url_for('get_recipies') }}" class="waves-effect waves-light btn-large green darken-2 text-shadow space">Browse</a>
+                        <a href="{{ url_for('add') }}" class="waves-effect waves-light btn-large green darken-2 text-shadow space"><i class="fas fa-plus-circle"></i> Add</a>
+                        <a href="{{ url_for('get_recipies') }}" class="waves-effect waves-light btn-large green darken-2 text-shadow space"><i class="fas fa-glasses"></i> Browse</a>
                         {% if session.user|lower == "admin"|lower %}
                         <a href="{{ url_for('get_categories') }}" class="waves-effect waves-light btn-large green darken-2 text-shadow space">
-                            Manage Categories</a>
+                            <i class="fas fa-users"></i> Manage</a>
                         {% endif %}
                     </div>
                 </div>

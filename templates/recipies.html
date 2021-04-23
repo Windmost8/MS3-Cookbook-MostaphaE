@@ -17,7 +17,7 @@
     <h6 class="text-darken-4 center-align">(<b>Click</b> on a recipie name listed below to view! Alternatively <b>search</b> 
         for any recipie names or ingredients.)</h6>
     <h6 class="text-darken-4 center-align">Or perhaps you would rather <a href="{{ url_for('login') }}">add </a>your own?</h6>
-    <h6 class="text-darken-4 center-align">The <i class="fas fa-pen-square orange-text"></i> symbol indicates your own recipies.</h6>
+    <h6 class="text-darken-4 center-align">The <i class="fas fa-flag orange-text"></i> symbol indicates your own recipies.</h6>
 
     <br>
 
@@ -59,7 +59,7 @@
                     <strong>{{ recipie.recipie_name }}</strong>
                 </div>
                 {% if (session.user|lower == recipie.created_by|lower or session.user|lower == "admin"|lower)  %}
-                    <i class="fas fa-pen-square orange-text"></i>
+                    <i class="fas fa-flag orange-text"></i>
                 {% endif %}
             </div>
             <div class="collapsible-body">
