@@ -69,11 +69,11 @@ def register():
             flash("Username already exists")
             return redirect(url_for("register"))
 
-        register = {
+        register_user = {
             "username": request.form.get("username").lower(),
             "password": generate_password_hash(request.form.get("password"))
         }
-        mongo.db.users.insert_one(register)
+        mongo.db.users.insert_one(register_user)
 
         # put the new user into 'session' cookie
         session["user"] = request.form.get("username").lower()
@@ -214,6 +214,15 @@ def delete_recipie(recipie_id):
     Delete functinoality, removing the recipie in question
     from the mongo database.
     """
+    recipie = mongo.db.recipies.find_one({"_id": ObjectId(recipie_id)})
+    if session.get("user") is None:
+        return render_template("error.html")
+    if recipie is None:
+        return render_template("error.html")
+    username = mongo.db.users.find_one(
+            {"username": session["user"]})["username"]
+    if session["user"] != recipie["created_by"] and username != "admin":
+        return render_template("error.html")
     mongo.db.recipies.remove({"_id": ObjectId(recipie_id)})
     return redirect(url_for("get_recipies"))
 
@@ -296,8 +305,18 @@ def delete_category(category_id):
     Delete functinality for categories
     removing them from the database
     """
-    mongo.db.categories.remove({"_id": ObjectId(category_id)})
-    return redirect(url_for("get_categories"))
+    categories = mongo.db.categories.find_one({"_id": ObjectId(category_id)})
+    if session.get("user") is None:
+        return render_template("error.html")
+    if categories is None:
+        return render_template("error.html")
+    username = mongo.db.users.find_one(
+        {"username": session["user"]})["username"]
+    if username == "admin":
+        mongo.db.categories.remove({"_id": ObjectId(category_id)})
+        return redirect(url_for("get_categories"))
+    else:
+        return render_template("error.html")
 
 
 @app.route("/error")

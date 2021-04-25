@@ -36,33 +36,21 @@ However, there are also other cases that need to be noted.
 
 In addition to other features, the **CRUD** guidelines are also intended to be major features for this site's functionality and purpose.
 
-* *Log In/Log Out*
+* *User Authentication*
 
-* *Register*
+* *Adding*
 
-* *Manage Profile*
+* *Editing*
 
-* *Browse*
+* *Searching*
 
-* *Search*
+* *Deleting*
+
+* *Admin*
 
 * *Social Media*
 
 * *Navigation Menu*
-
-* *Given two registered users, user 1 should not be able to update or delete user 2's recipes, nor can the anonymus user alter any other's recipes. Users cannot change anything about
-any other users profiles as well*
-
-* *If a recipe is deleted but you clicked on edit or accessed it through the URL, it should redirect you to a 404 page*
-* *The search bar will show/auto complete only recipe titles*
-
-* Expected -Feature is expected to do X why the user does Y
-Testing - Tested the feature by doing Y
-Result - The feature did not respond due to A,B,C
-or
-Result - The feature acted as normally and it did Y
-Fix - I did Z to the code because something was missing
-and the inclusion of screenshots.
 
 ---
 
@@ -124,6 +112,22 @@ In addition, the recipies themselves are shown with a brown header, once again t
 ---
 
 # Testing
+
+* *Given two registered users, user 1 should not be able to update or delete user 2's recipes, nor can the anonymus user alter any other's recipes. Users cannot change anything about
+any other users profiles as well*
+
+* *If a recipe is deleted but you clicked on edit or accessed it through the URL, it should redirect you to a 404 page*
+* *The search bar will show/auto complete only recipe titles*
+
+* Expected -Feature is expected to do X why the user does Y
+Testing - Tested the feature by doing Y
+Result - The feature did not respond due to A,B,C
+or
+Result - The feature acted as normally and it did Y
+Fix - I did Z to the code because something was missing
+and the inclusion of screenshots.
+
+* User Authentication
 
 ### **Screenshots**
 
