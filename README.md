@@ -321,7 +321,7 @@ Each document contains an objectid by which we can target and use for our projec
 * ***Browsers Tested***
     * Google Chrome
     * Firefox
-    * Internet Explorer
+    * Microsoft Edge
 
 ### **Screenshots**
 
