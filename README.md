@@ -31,7 +31,7 @@ However, there are also other cases that need to be noted.
 https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/5b2a0d293b9c301158362e9fd5107c03be3ebefb/wireframes
 
 * Screenshots relevant to the wireframes can also be found in the link below, or alternatively in the screenshots directory under the relevant device folder.
-https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/5b2a0d293b9c301158362e9fd5107c03be3ebefb/screenshots
+https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/4ff74725c2766c1d57a8541027fc1020f9922809/screenshots
 
 It is to be noted that the wireframes differ depending on user. Most notably is the inclusion of
 an admin page, as well as the navbar showing an "admin" link. 
