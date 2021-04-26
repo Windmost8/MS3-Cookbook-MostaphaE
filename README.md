@@ -28,10 +28,10 @@ However, there are also other cases that need to be noted.
 ### **Wireframes**
 * Included below are links to the wireframes for three major devices; **desktop**, **mobile**, and **tablets**)
 (Alternatively, they may be found inside the "wireframes" folder directory).
-https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/45a75240e8e35247849fdf00fe29db085581a779/wireframes
+https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/5b2a0d293b9c301158362e9fd5107c03be3ebefb/wireframes
 
 * Screenshots relevant to the wireframes can also be found in the link below, or alternatively in the screenshots directory under the relevant device folder.
-https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/45a75240e8e35247849fdf00fe29db085581a779/screenshots
+https://github.com/Windmost8/MS3-Cookbook-MostaphaE/blob/5b2a0d293b9c301158362e9fd5107c03be3ebefb/screenshots
 
 It is to be noted that the wireframes differ depending on user. Most notably is the inclusion of
 an admin page, as well as the navbar showing an "admin" link. 
@@ -404,12 +404,12 @@ you cann "deploy branch". Now the deployed site should be available and automica
 # Credits 
 The cooking images were taken from https://www.dreamstime.com/photos-images/asian-cooking.html. As such, watermarks are present.
 The images in question are;
-https://thumbs.dreamstime.com/b/onion-pepper-tomato-tomato-lime-vegetable-asian-cooking-vintage-image-onion-pepper-tomato-tomato-lime-vegetable-asian-185990624.jpg
-https://thumbs.dreamstime.com/b/asian-food-cooking-wok-noodles-chicken-stir-fry-vegetables-ingredients-spices-sauces-chopsticks-dark-rustic-83701227.jpg
+* https://thumbs.dreamstime.com/b/onion-pepper-tomato-tomato-lime-vegetable-asian-cooking-vintage-image-onion-pepper-tomato-tomato-lime-vegetable-asian-185990624.jpg
+* https://thumbs.dreamstime.com/b/asian-food-cooking-wok-noodles-chicken-stir-fry-vegetables-ingredients-spices-sauces-chopsticks-dark-rustic-83701227.jpg
 
 The other cooking image was a free stock photo, as well as the error image.
-https://media.istockphoto.com/photos/cooking-mushrooms-picture-id964432374?k=6&m=964432374&s=612x612&w=0&h=5u7P8Z5DPGVyfHdiYufdEi_o83Lw4CK-FJKUKMyPc-E=
-https://iconsplace.com/wp-content/uploads/_icons/ffa500/256/png/error-icon-11-256.png
+* https://media.istockphoto.com/photos/cooking-mushrooms-picture-id964432374?k=6&m=964432374&s=612x612&w=0&h=5u7P8Z5DPGVyfHdiYufdEi_o83Lw4CK-FJKUKMyPc-E=
+* https://iconsplace.com/wp-content/uploads/_icons/ffa500/256/png/error-icon-11-256.png
 
 User authentication and certain CRUD functionality were aided from Code Institute.
 
