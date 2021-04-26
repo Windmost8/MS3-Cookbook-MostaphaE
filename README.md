@@ -358,6 +358,10 @@ app.py:24:4: W0611: Unused import env (unused-import)
 
 * Certain pylint errors remain (shown above)
 
+* All template files show warnings which are unavoidable.
+
+* Both py files show errors that are unavoidable.
+
 ---
 
 # Deployment
