@@ -1,16 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
-
-<main>
     <div class="row card-panel border">
         <h3 class="text-darken-4 center-align"><i>Add Recipe</i></h3>
+        <p class="center-align">(Characters must be a minimum of 5)</p>
         <form class="col s12" method="POST" action="{{ url_for('add') }}">
 			<div class="row">
 				<div class="input-field col s12">
                     <i class="fas fa-hamburger prefix text-darken-4"></i>
 					<select id="category_name" name="category_name" class="validate" required>
-                        <option value="" disabled selected>Choose Category</option>
+                        <option value="" disabled selected>Category</option>
                         {% for category in categories %}
                             <option value="{{ category.category_name }}">{{ category.category_name }}</option>
                         {% endfor %}
@@ -29,7 +28,8 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-pizza-slice prefix text-darken-4"></i>
-                    <input id="ingredients" name="ingredients" type="text" class="validate" required>
+                    <input id="ingredients" name="ingredients" type="text" minlength="5"
+                        maxlength="2000" class="validate" required>
                     <label for="ingredients">Ingredients</label>
                 </div>
             </div>
@@ -37,15 +37,17 @@
                 <div class="input-field col s12">
                     <i class="fas fa-hands-wash prefix text-darken-4"></i>
                     <textarea id="preparation" name="preparation" minlength="5"
-                        maxlength="200" class="materialize-textarea validate" required></textarea>
+                        maxlength="2000" class="materialize-textarea validate" required></textarea>
                     <label for="preparation">Preparation</label>
                 </div>
             </div>
             <div class="row">
                 <!--special tools does not have a required attribute on purpose-->
+                <p class="center-align">(Optional)</p>
                 <div class="input-field col s12">
                     <i class="fas fa-tools prefix text-darken-4"></i>
-                    <input id="special_tools" name="special_tools" type="text">
+                    <input id="special_tools" name="special_tools" type="text" minlength="5"
+                        maxlength="2000">
                     <label for="special_tools">Special Tools</label>
                 </div>
             </div>
@@ -60,8 +62,6 @@
             </div>
         </form>
     </div>
-</main>
-
 
 {% endblock %}
 

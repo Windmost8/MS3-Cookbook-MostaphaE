@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
-<main>
     <div class="row card-panel border">
         <h3 class="text-darken-4 center-align"><i>Edit Recipe</i></h3>
+        <p class="center-align">(Characters must be a minimum of 5)</p>
         <form class="col s12" method="POST" action="{{ url_for('edit_recipie', recipie_id=recipie._id) }}">
 			<div class="row">
 				<div class="input-field col s12">
                     <i class="fas fa-hamburger prefix text-darken-4"></i>
 					<select id="category_name" name="category_name" class="validate" required>
-                        <option value="" disabled selected>Choose Category</option>
+                        <option value="" disabled selected>Category</option>
                         {% for category in categories %}
                             {% if category.category_name == recipie.category_name %}
                                 <option value="{{ category.category_name }}" selected>{{ category.category_name }}</option>
@@ -32,7 +32,8 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="fas fa-pizza-slice prefix text-darken-4"></i>
-                    <input id="ingredients" name="ingredients" value="{{ recipie.ingredients }}" type="text" class="validate" required>
+                    <input id="ingredients" name="ingredients" value="{{ recipie.ingredients }}" type="text" minlength="5"
+                        maxlength="2000" class="validate" required>
                     <label for="ingredients">Ingredients</label>
                 </div>
             </div>
@@ -40,15 +41,17 @@
                 <div class="input-field col s12">
                     <i class="fas fa-hands-wash prefix text-darken-4"></i>
                     <textarea id="preparation" name="preparation" minlength="5"
-                        maxlength="200" class="materialize-textarea validate" required>{{- recipie.preparation -}}</textarea>
+                        maxlength="2000" class="materialize-textarea validate" required>{{- recipie.preparation -}}</textarea>
                     <label for="preparation">Preparation</label>
                 </div>
             </div>
             <div class="row">
+                <p class="center-align">(Optional)</p>
                 <div class="input-field col s12">
                     <i class="fas fa-tools prefix text-darken-4"></i>
-                    <input id="special_tools" name="special_tools" value="{{ recipie.special_tools }}" type="text">
-                    <label for="special_tools">Special Tools</label>
+                    <input id="special_tools" name="special_tools" value="{{ recipie.special_tools }}" type="text" minlength="5"
+                        maxlength="2000">
+                    <label for="special_tools">Special Tools (Optional)</label>
                 </div>
             </div>
             
@@ -64,5 +67,5 @@
             </div>
         </form>
     </div>
-</main>
+
 {% endblock %}

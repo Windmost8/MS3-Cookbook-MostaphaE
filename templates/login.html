@@ -1,7 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
 
-<main>
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card-panel border">
+                <!--materlize typograpy class-->
+                <p class="flow-text center-align text-darken-4">Login first, in order to add your own recipies and share with the
+                    world your creations. Remember, we learn as we eat, or eat as we learn, all at <i>reCook</i>! <b>Continue below.</b>
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('login') }}">
             <div class="card">
@@ -36,6 +46,5 @@
             </div>
         </form>
     </div>
-</main>
 
 {% endblock %}

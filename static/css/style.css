@@ -63,3 +63,7 @@ body {
     display:flex;
     justify-content: flex-end;
 }
+
+.wrap {
+    word-wrap: break-word;
+}

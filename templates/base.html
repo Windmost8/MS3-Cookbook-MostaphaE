@@ -61,32 +61,33 @@
             <li><a href="{{ url_for('get_recipies') }}">Home</a></li>
             {% if session.user %}
             <li><a href="{{ url_for('profile', username=session['user']) }}">Profile</a></li>
+            <li><a href="{{ url_for('add') }}">Add</a></li>
             {% if session.user|lower == "admin"|lower %}
-                <li><a href="{{ url_for('get_categories') }}">Manage</a></li>
+                <li><a href="{{ url_for('get_categories') }}">Admin</a></li>
             {% endif %}
             <li><a href="{{ url_for('logout') }}">Log Out</a></li>
             {% else %}
             <li><a href="{{ url_for('login') }}">Sign In</a></li>
             <li><a href="{{ url_for('register') }}">Register</a></li>
             {% endif %}
-            <li><h4 class="center-align orange lighten-2">{{ username }}</h4></li>
 		</ul>
     </header>
 
-    <section>
+    <!--section tag was changed to div in order to be w3 html validated-->
+    <div>
         <!-- flash messages -->
         <div id="flashtimer">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="row flashes">
-                        <h4 class="orange lighten-4 center-align">{{ message }}</h4>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="row flashes">
+                                <h5 class="orange lighten-4 center-align">{{ message }}</h5>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
         </div>
-    </section>
+    </div>
 
     <main class="container">
         {% block content %}

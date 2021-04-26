@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
-<main>
     <div class="row">
         <div class="col s12 m8 offset-m2">
             <div class="card-panel border">
                 <!--materlize typograpy class-->
-                <p class="flow-text center-align text-darken-4">Welcome... friends and family,
+                <p class="flow-text center-align text-darken-4">Welcome Home... friends and family,
                     to an online platform to learn as we eat, or eat as we learn. Welcome to <i>reCook</i>! Enjoy.
                 </p>
             </div>
@@ -16,7 +15,7 @@
     <h3 class="text-darken-4 center-align"><i>Featured Recipies</i></h3>
     <h6 class="text-darken-4 center-align">(<b>Click</b> on a recipie name listed below to view! Alternatively <b>search</b> 
         for any recipie names or ingredients.)</h6>
-    <h6 class="text-darken-4 center-align">Or perhaps you would rather <a href="{{ url_for('login') }}">add </a>your own?</h6>
+    <h6 class="text-darken-4 center-align">Or perhaps you would rather add your own? Then login <a href="{{ url_for('login') }}">here</a>!</h6>
     <h6 class="text-darken-4 center-align">The <i class="fas fa-flag orange-text"></i> symbol indicates your own recipies.</h6>
 
     <br>
@@ -62,7 +61,7 @@
                     <i class="fas fa-flag orange-text"></i>
                 {% endif %}
             </div>
-            <div class="collapsible-body">
+            <div class="collapsible-body wrap">
                 <p><strong>Recipie Name:</strong><i> {{ recipie.recipie_name }}</i></p>
                 <p><strong>Category:</strong><i> {{ recipie.category_name }}</i></p>
                 <p><strong>Preparation:</strong><i> {{ recipie.preparation }}</i></p>
@@ -75,21 +74,22 @@
                 {% endif %}
             </div>
         </li>
-
-        <!-- materlize Modal Structure -->
-        <div id="{{ loop.index }}" class="modal">
-            <div class="modal-content">
-                <h4>Warning!</h4>
-                <p>Are you sure you want to delete this?</p>
+        <!--modal was div was required to be in a list tag to be w3 html validated-->
+        <li>
+            <!-- materlize Modal Structure -->
+            <div id="{{ loop.index }}" class="modal">
+                <div class="modal-content">
+                    <h4>Warning!</h4>
+                    <p>Are you sure you want to delete this?</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#!" class="modal-close btn-small red"><i class="fas fa-times-circle"></i> Cancel</a>
+                    <a href="{{ url_for('delete_recipie', recipie_id=recipie._id) }}" class="modal-close btn-small green darken-1">
+                        <i class="fas fa-trash"></i> Agree
+                    </a>
+                </div>
             </div>
-            <div class="modal-footer">
-                <a href="#!" class="modal-close btn-small red"><i class="fas fa-times-circle"></i> Cancel</a>
-                <a href="{{ url_for('delete_recipie', recipie_id=recipie._id) }}" class="modal-close btn-small green darken-1">
-                    <i class="fas fa-trash"></i> Agree
-                </a>
-            </div>
-        </div>
-
+        </li>
         {% endfor %}
     </ul>
     {% else %}
@@ -100,5 +100,5 @@
     <div class="btnup">
         <a href="#query" class="orange btn text-shadow">Back Top <i class="fas fa-arrow-up"></i></a>
     </div>
-</main>    
+   
 {% endblock %}

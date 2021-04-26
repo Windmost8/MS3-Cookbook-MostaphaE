@@ -1,7 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
 
-<main>
+    <div class="row">
+        <div class="col s12 m8 offset-m2">
+            <div class="card-panel border">
+                <!--materlize typograpy class-->
+                <p class="flow-text center-align text-darken-4">In order to start sharing your recipies with the world, you must
+                    first register an account with which you will gain access to our features, and also be identified by, at <i>reCook</i>!
+                    <b>Continue below.</b>
+                </p>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <form class="col s12 m8 offset-m2" method="POST" action="{{ url_for('register') }}">
             <div class="card">
@@ -39,5 +50,5 @@
             </div>
         </form>
     </div>
-</main>
+
 {% endblock %}
